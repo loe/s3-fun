@@ -54,7 +54,7 @@ num_threads.times do
         path = key.split('/')
         file_name = path.pop
         File.makedirs(File.join(dest, path)) # Make the enclosing folder.
-        file = File.new(File.join(dest, path, "#{file_name}"), File::CREAT|File::RDWR)
+        file = File.new(File.join(dest, path, "#{file_name}"), File::WRONLY|File::TRUNC|File::CREAT)
         s3.interface.get(src, key) do |chunk|
           file.write(chunk)
         end
